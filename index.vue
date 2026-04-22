@@ -1,29 +1,68 @@
 <template>
-  <ad-breadcrumb
-    :items="items"
-    separator="prime:angle-right"
-    class="nuc-breadcrumb"
-  />
+  <nav v-if="items.length" class="nuc-breadcrumb">
+    <template v-for="(item, index) in items" :key="item.href">
+      <NuxtLink
+        v-if="index !== 0 && index < items.length - 1"
+        :to="item.href"
+        class="breadcrumb-item"
+      >
+        {{ item.label }}
+      </NuxtLink>
+      <span
+        v-else
+        class="breadcrumb-item"
+        :class="{ 'breadcrumb-active':
+             index === items.length - 1 }"
+      >
+        {{ item.label }}
+      </span>
+      <span v-if="index < items.length - 1" class="breadcrumb-separator">
+        /
+      </span>
+    </template>
+  </nav>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { translate_segment } from './utils/translate_segment'
 
-import type { AnchorInterface } from 'nucleify'
+const route = useRoute()
+const { t, locale } = useI18n()
+const items = computed(() => {
+  const lang = (route.params.lang as string) || locale.value
 
-const items = ref<AnchorInterface[]>([
-  {
-    label: 'backoffice',
-    href: '/',
-    icon: 'mdi:home',
-  },
-  {
-    label: 'About',
-    href: '/about',
-  },
-])
+  const segments = route.path.split('/').filter(Boolean).slice(1)
+
+  if (segments.length === 0 || segments[0] === 'home') {
+    return [
+      {
+        label: t('nav-home'),
+        href: `/${lang}`,
+      },
+    ]
+  }
+
+  const breadcrumbs = [
+    {
+      label: t('nav-home'),
+      href: `/${lang}`,
+    },
+  ]
+
+  segments.forEach((segment, index) => {
+    breadcrumbs.push({
+      label: translate_segment(segment, t),
+      href: `/${lang}/` + segments.slice(0, index + 1).join('/'),
+    })
+  })
+
+  return breadcrumbs
+})
 </script>
 
 <style lang="scss">
-@import 'index'
+@import './index';
 </style>
