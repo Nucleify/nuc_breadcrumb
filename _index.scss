@@ -20,15 +20,18 @@
     color: $secondary-text-color;
     text-decoration: none;
     transition: all 0.2s ease;
+
     &:hover {
       color: $main-color;
       text-shadow: 0 0 6px $main-color;
     }
   }
+
   .breadcrumb-active {
     color: $main-color;
     font-weight: 500;
   }
+
   .breadcrumb-separator {
     color: $secondary-text-color;
     opacity: 0.4;
