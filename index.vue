@@ -30,7 +30,7 @@ import { useI18n } from 'vue-i18n'
 import { translate_segment } from './utils/translate_segment'
 
 const route = useRoute()
-const { t, locale } = useI18n()
+const { t, te, locale } = useI18n()
 const items = computed(() => {
   const lang = (route.params.lang as string) || locale.value
 
@@ -54,7 +54,7 @@ const items = computed(() => {
 
   segments.forEach((segment, index) => {
     breadcrumbs.push({
-      label: translate_segment(segment, t),
+      label: translate_segment(segment, t, te),
       href: `/${lang}/` + segments.slice(0, index + 1).join('/'),
     })
   })

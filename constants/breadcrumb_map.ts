@@ -5,6 +5,7 @@ export const breadcrumb_map: Record<string, string> = {
   login: 'nav-login',
   services: 'footer-services',
   about: 'footer-about',
+  'about-us': 'footer-about',
   process: 'footer-process',
   contact: 'footer-contact',
 }
