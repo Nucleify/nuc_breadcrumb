@@ -8,4 +8,5 @@ export const breadcrumb_map: Record<string, string> = {
   'about-us': 'footer-about',
   process: 'footer-process',
   contact: 'footer-contact',
+  legal: 'footer-legal',
 }

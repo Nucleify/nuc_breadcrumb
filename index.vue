@@ -27,7 +27,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { translate_segment } from './utils/translate_segment'
+
+import { translate_segment } from 'nucleify'
 
 const route = useRoute()
 const { t, te, locale } = useI18n()
@@ -64,5 +65,5 @@ const items = computed(() => {
 </script>
 
 <style lang="scss">
-@import './index';
+@import 'index';
 </style>

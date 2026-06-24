@@ -1,7 +1,6 @@
 import type { Composer } from 'vue-i18n'
 
-import { breadcrumb_map } from '../constants/breadcrumb_map'
-import { format_label } from './format_label'
+import { breadcrumb_map, format_label } from 'nucleify'
 
 const segment_alias_map: Record<string, string> = {
   'ecommerce-stores': 'ecommerce',
